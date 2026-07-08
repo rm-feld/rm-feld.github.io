@@ -1,0 +1,41 @@
+---
+modified: 2026-04-07T13:19:31-07:00
+created: 2026-04-06T21:08:39-07:00
+---
+- [[Stack Exchange Data Setting Blurb|Stack Exchange]]
+I feel like moderation/etc. is not a bad story, but a lot of these seem not super appropriate. eg. It's perhaps harder to make a case/story about predicting winner with a random effect for chess, but there might be a reasonable case for bad sportsmanship/who is going to exit the game early, etc. 
+
+- **[eBird](https://cornelllabofornithology.github.io/ebird-best-practices/intro.html)**
+	- poisson 
+	- maybe stronger issues with time/space dependence but meaningful zero observation (**complete checklists**)
+- Citizen science?
+	- [Galaxy Zoo Image Classification-Type Projects](https://data.galaxyzoo.org/#section-0) - (user $x$ image cross)
+		- if we have user ids, we can do agreement with consensus?
+		- [Fossil Finder](https://drive.google.com/drive/folders/1T1o8R5yeJGl_QbmSy5YlVyzGFUi95Tbm)
+			- I think we'd need to rely on image covariates here, but we'll see
+			- very manufactured but some of these have open-ended annotation 
+		- [Snapshot Serengeti](https://lila.science/datasets/snapshot-serengeti-addendum)
+			- has some weak [[Snapshot Serengeti Raw Classification Metadata|user-specific information!]]
+- [Wikipedia number of edits?](https://wikitech.wikimedia.org/wiki/Data_Platform/Data_Lake/Edits/MediaWiki_history_dumps)
+	- don't really like the cross behavior interpretation, but maybe it's fine. Maybe an interaction vs. edit thing for the zero-value, eg. comment?
+- Youtube - 
+	- categorical: user id x creator id 
+	- nice 2-variate: leave a comment, like post 
+- [Lichess](https://database.lichess.org/#standard_games) - 
+	- "ends game early" but i don't know how accessible that is - i think probably though. 
+	- [covariates not super awful](https://github.com/thomas-daniels/aix/blob/main/docs/columns.md)
+	- 
+- [Open Review](https://github.com/Seafoodair/Openreview/tree/master/Rebuttal/Model) / [Gen-review](https://anonymous.4open.science/r/gen_review/README.md)
+	- confused about the stated goals of gen-review
+	- open review: author 1 $x$ author 2 $x$ author 3 $x$ reviewer 1 $x$ reviewer 2 $x$ reviewer 3 
+		- if we filter to regimes with less single-paper authors, seems reasonably natural 
+- [Julian McAuley misc.](https://cseweb.ucsd.edu/~jmcauley/datasets.html#amazon_reviews)
+	- Amazon product reviews (user $x$ product cat/bin)
+	- [twitch](https://github.com/JRappaz/liverec) pre-2019 includes lurkers (poisson where we can off-by-one the zero case?)
+		- i'm a little worried about lack of session/stream information, which i think is gone by now. 
+	- [marketBias](https://github.com/MengtingWan/marketBias/blob/master/analysis.ipynb) seems to have some stuff?
+	- [Google Local Data](https://mcauleylab.ucsd.edu/public_datasets/gdrive/googlelocal/) has some covariates, binary on "business responds to user review?" or "user includes image in review?"
+	- goodreads spoiler data
+- maybe something derivable from image datasets + human-ai interactions, in general (pinterest)
+	- actually the role-playing one could be interesting, though i doubt the 
+		- but the motivating starting point here is shared starting prompt - eg. character ai 
