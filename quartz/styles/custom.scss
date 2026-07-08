@@ -12,17 +12,22 @@ header {
 
 // --- Broken wikilinks --------------------------------------------------------
 // CrawlLinks (crawl-links plugin, `disableBrokenWikilinks: true`) tags internal
-// links that don't resolve to a real page with an extra `.broken` class. Style
-// those distinctly and show a tooltip on hover instead of letting them 404.
+// links that don't resolve to a real page with an extra `.broken` class. Quartz
+// core (base.scss) already styles `.internal` links as a highlighted "pill" and
+// dims `.broken` ones to 50% opacity on top of that — stack those and it reads
+// as a heavy dark badge. Strip the pill treatment back to plain text, just a
+// touch darker than body copy, full opacity, and a hover tooltip instead.
 a.internal.broken {
-  color: var(--gray);
+  color: var(--darkgray);
+  background-color: transparent;
+  opacity: 1;
   cursor: help;
-  text-decoration: line-through;
   position: relative;
 }
 
 a.internal.broken:hover {
-  color: var(--gray);
+  color: var(--darkgray);
+  opacity: 1;
 }
 
 a.internal.broken::after {

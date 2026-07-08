@@ -41,6 +41,15 @@ const Darkmode = getRegisteredComponent("darkmode")
 const ReaderMode = getRegisteredComponent("reader-mode")
 const TableOfContents = getRegisteredComponent("table-of-contents")
 const Explorer = getRegisteredComponent("explorer")
+
+// Graph, Backlinks, etc. are "component-only" plugins (side-effect-imported,
+// not run through the normal plugin factory pipeline) — the `options:` block
+// under their entry in quartz.config.yaml is silently ignored for these.
+// Overrides have to be registered here instead, before instantiation.
+componentRegistry.setOptionOverrides("graph", {
+  localGraph: { showTags: false },
+  globalGraph: { showTags: false },
+})
 const Graph = getRegisteredComponent("graph")
 const Backlinks = getRegisteredComponent("backlinks")
 
