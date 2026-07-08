@@ -1,0 +1,92 @@
+@use "./variables.scss" as *;
+
+// put your custom CSS here!
+
+// --- Top nav header spacing -------------------------------------------------
+// Push the search icon to the right edge, nav links on the left.
+header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--lightgray);
+  padding-bottom: 1rem;
+}
+
+// --- Broken wikilinks --------------------------------------------------------
+// CrawlLinks (crawl-links plugin, `disableBrokenWikilinks: true`) tags internal
+// links that don't resolve to a real page with an extra `.broken` class. Style
+// those distinctly and show a tooltip on hover instead of letting them 404.
+a.internal.broken {
+  color: var(--gray);
+  cursor: help;
+  text-decoration: line-through;
+  position: relative;
+}
+
+a.internal.broken:hover {
+  color: var(--gray);
+}
+
+a.internal.broken::after {
+  content: "Sorry, this doesn't exist yet!";
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark);
+  color: var(--light);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+a.internal.broken:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+// --- Home page two-column hero ----------------------------------------------
+.home-hero {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.home-hero__image {
+  flex: 0 0 auto;
+  width: 220px;
+}
+
+.home-hero__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.home-hero__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.home-hero__text h1 {
+  margin-top: 0;
+}
+
+@media #{$mobile} {
+  .home-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .home-hero__image {
+    width: 160px;
+  }
+}
