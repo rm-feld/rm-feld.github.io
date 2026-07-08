@@ -1,5 +1,5 @@
 ---
-modified: 2026-07-08T02:56:07-07:00
+modified: 2026-07-08T03:07:36-07:00
 created: 2026-07-07T21:24:18-07:00
 ---
 # $K$ Random Effects
@@ -22,7 +22,6 @@ created: 2026-07-07T21:24:18-07:00
 - [[Stack Exchange Writeup 2]]
 # Simulations 
 - [[Simulation Specs and Notes - Independent-x Random Slopes Model]]
-- 
 # Beta Direction Exploration
 - [[Some Notes on Maximum Score Estimation]]
 # Random Slopes 
