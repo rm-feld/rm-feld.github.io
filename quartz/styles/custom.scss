@@ -10,24 +10,52 @@ header {
   padding-bottom: 1rem;
 }
 
+// --- Internal link colors ----------------------------------------------------
+// Quartz's theme colors (--secondary, --dark, etc.) swap automatically between
+// light/dark mode via the `[saved-theme="dark"]` attribute Quartz puts on <html>
+// when you toggle dark mode — mirror that same pattern here so these two new
+// colors follow the toggle too.
+:root {
+  --link-blue: #1d4ed8;
+  --link-pink: #be185d;
+}
+:root[saved-theme="dark"] {
+  --link-blue: #60a5fa;
+  --link-pink: #f472b6;
+}
+
+// Quartz core (base.scss) styles `.internal` links as a highlighted "pill"
+// (background tint, padding, no underline) — that's what made resolved and
+// broken links both read as plain highlighted/bolded text instead of links.
+// Strip the pill and use a plain underlined-link treatment instead: blue for
+// links that resolve, pink for ones that don't (still a hover tooltip on those).
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--link-blue);
+}
+
+a.internal:hover {
+  color: var(--link-blue);
+  opacity: 0.75;
+}
+
 // --- Broken wikilinks --------------------------------------------------------
 // CrawlLinks (crawl-links plugin, `disableBrokenWikilinks: true`) tags internal
-// links that don't resolve to a real page with an extra `.broken` class. Quartz
-// core (base.scss) already styles `.internal` links as a highlighted "pill" and
-// dims `.broken` ones to 50% opacity on top of that — stack those and it reads
-// as a heavy dark badge. Strip the pill treatment back to plain text, just a
-// touch darker than body copy, full opacity, and a hover tooltip instead.
+// links that don't resolve to a real page with an extra `.broken` class.
 a.internal.broken {
-  color: var(--darkgray);
-  background-color: transparent;
+  color: var(--link-pink);
   opacity: 1;
   cursor: help;
   position: relative;
 }
 
 a.internal.broken:hover {
-  color: var(--darkgray);
-  opacity: 1;
+  color: var(--link-pink);
+  opacity: 0.75;
 }
 
 a.internal.broken::after {
