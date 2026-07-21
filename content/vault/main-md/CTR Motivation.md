@@ -1,13 +1,8 @@
 ---
-modified: 2026-02-19T21:59:23-08:00
+modified: 2026-07-13T11:24:06-07:00
 created: 2026-02-14T18:37:13-08:00
 ---
 
-# Abstract
-%% We propose an extension to the All-Row-Column (ARC) method for probit models with two crossed random effects to $K$ crossed random effects. Under similar constraints on the underlying observations, the extension infers the coefficient vector $\beta$ and random effect variances $\sigma_{k}$ in $O(KN)$ time. We also interrogate behavior under  inconvenient  observation structures that emerge for $K > 2$. We apply observations under these structures under three case studies;  (1) generic no weighting required (FIND ONE PLEASE),  (2) advertising CTR, and (3) multiple allele settings (ALSO FIND ONE PLEASE). or barcoding but not sure if this is worth it for wtf is response
- %%
-
-# Notation
 # CTR 
 We interrogate data structures that emerge in the case of 3 crossed random effects. Consider the domain of online advertising. Here, we let $(i, j, k)$ encode the cross $\text{user }\times \text{ site } \times \text{ advertiser}$. $Z_{ijk} = 1$ indicates that user $i$ was served advertisement $k$ on site $j$. $Y_{ijk} = 1 \mid Z_{ijk} = 1$ corresponds to the event that user $i$ clicked on the served advertisement. We note possible interpretations for $a_{i}$, $b_{j}$, and $c_{k}$ in this regime as, in order, a user's inclination to click on advertisements in general, a site's "trustworthiness" (the general userbase's belief that the site would not promote malware, e.g.), and the "clickability" of the advertisement %% (perhaps some measure of potential virality)%%. 
 

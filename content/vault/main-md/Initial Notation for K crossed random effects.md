@@ -1,6 +1,7 @@
 ---
-modified: 2026-05-28T10:15:41-07:00
+modified: 2026-07-09
 created: 2026-02-16T15:20:19-08:00
+tags: [genai/claude]
 ---
 Throughout, we use the notation of integer arrays from brackets, i.e. $[N] = \left\{ 1,\dots, N \right\}$. We also use $\xi \sim \mathcal{N}(0, 1)$ as the generic unit [[Normal Distribution|normal]] placeholder for likelihood calculations. 
 
@@ -26,7 +27,7 @@ Generically, we give the $K$-crossed random effects model by the following.
 
 To be more direct, the choice of $\mathbb{A}$ coincides with the definition of the model with respect to the chosen set of interaction terms considered. 
 
-We let $\tilde{Y}_{\boldsymbol{i}}:= 2Y_{i} - 1 \in\left\{ -1, 1 \right\}$, which is convenient for simplifying likelihoods. 
+$Y_{\boldsymbol{i}} \in \left\{ -1, +1 \right\}$ is $\pm 1$-valued by default (no separate tilde/signed transform needed — $\tilde{\cdot}$ is reserved for other objects, e.g. slice-decay terms and growth-rate exponents). 
 
 We use $\ell$ to index individual observations, so that $a_{\ell} := a_{\boldsymbol{i}(\ell)} := (a_{i_{1}}, \dots, a_{i_{k}})^{\intercal}$, and $a_{\ell}[\mathcal{K}]:=a_{\boldsymbol{i}(\ell)}[\mathcal{K}]$. 
 

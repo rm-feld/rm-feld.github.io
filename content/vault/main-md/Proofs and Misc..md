@@ -1,6 +1,7 @@
 ---
-modified: 2026-03-16T11:53:39-07:00
+modified: 2026-07-09
 created: 2026-03-13T20:53:31-07:00
+tags: [genai/claude]
 ---
 
 # $K$-arc model, generic 
@@ -8,8 +9,8 @@ created: 2026-03-13T20:53:31-07:00
 > [!attention] K-Crossed Random Effects Model 
 > The binary $K$-crossed random effects model with mean function $g$ is given by 
 > 
-> $$\begin{align*} \mathbb{P}(Y_{\mathbf{i}} = 1) = g\left( x_{\mathbf{i}}^{\intercal}\beta + \sum_{k = 1}^{K} a_{k, \mathbf{i}} \right), \end{align*}$$
-> For $a_{k, \mathbf{i}} \sim \mathcal{N}(0, \sigma^{2}_{k})$ the random effect from the $k$th random effect with index $\mathbf{i}[k]$. Note $a_{\mathbf{i}} := (a_{1, \mathbf{i}}, \dots , a_{k, \mathbf{i}})$ the vector of random effects for index $\mathbf{i}$ is assumed independent in each entry. 
+> $$\begin{align*} \mathbb{P}(Y_{\boldsymbol{i}} = 1) = g\left( x_{\boldsymbol{i}}^{\intercal}\beta + \sum_{k = 1}^{K} a_{k, \boldsymbol{i}} \right), \end{align*}$$
+> For $a_{k, \boldsymbol{i}} \sim \mathcal{N}(0, \sigma^{2}_{k})$ the random effect from the $k$th random effect with index $\boldsymbol{i}[k]$. Note $a_{\boldsymbol{i}} := (a_{1, \boldsymbol{i}}, \dots , a_{k, \boldsymbol{i}})$ the vector of random effects for index $\boldsymbol{i}$ is assumed independent in each entry. 
 
 
 # Weighting Proofs 
@@ -17,13 +18,13 @@ created: 2026-03-13T20:53:31-07:00
 
 > [!lemma] Concentration of Weighted All Likelihood via Slice Decay
 > 
-> Letting $w_{\mathbf{i}}$ be any non-negative weights, normalized such that $\sum_{\mathbf{i}}w_{\mathbf{i}}Z_{\mathbf{i}} = N$. Define the per-level slice contributions $$\begin{align*} h_k(i_k) := \sum_{\mathbf{i} \in \mathcal{S}:, \mathbf{i}_k = i_k} w_{\mathbf{i}} Z_{\mathbf{i}}, \end{align*}$$ and let $\tilde{\varepsilon}_{k} := \max_{i_{k}} h_{k}(i_{k}) / N$. Suppose termwise marginal log likelihood $\eta_{\mathbf{i}}$ is uniformly bounded, and $\max_{k} \tilde{\varepsilon}_{k} \to 0$. Then for the weighted all log-likelihood $\ell_{\text{all}}(\gamma;w) = \sum_{\mathbf{i}}w_{\mathbf{i}}\eta_{\mathbf{i}}Z_{\mathbf{i}}$,
+> Letting $w_{\boldsymbol{i}}$ be any non-negative weights, normalized such that $\sum_{\boldsymbol{i}}w_{\boldsymbol{i}}Z_{\boldsymbol{i}} = N$. Define the per-level slice contributions $$\begin{align*} h_k(i_k) := \sum_{\boldsymbol{i} \in \mathcal{S}:, \boldsymbol{i}_k = i_k} w_{\boldsymbol{i}} Z_{\boldsymbol{i}}, \end{align*}$$ and let $\tilde{\varepsilon}_{k} := \max_{i_{k}} h_{k}(i_{k}) / N$. Suppose termwise marginal log likelihood $\eta_{\boldsymbol{i}}$ is uniformly bounded, and $\max_{k} \tilde{\varepsilon}_{k} \to 0$. Then for the weighted all log-likelihood $\ell_{\text{all}}(\gamma;w) = \sum_{\boldsymbol{i}}w_{\boldsymbol{i}}\eta_{\boldsymbol{i}}Z_{\boldsymbol{i}}$,
 > $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) \leq B^{2} \sum_{k=1}^{K} \tilde{\varepsilon}_{k} \to 0. \end{align*}$$
 
 **Proof.**
 
-By $|\eta_{\mathbf{i}}| \leq B$ uniformly bounded, covariate contributions can be bounded via a coordinate-wise union bound, $$\begin{align*} \lvert \mathrm{Cov}(\eta_{\mathbf{i}}, \eta_{\mathbf{i}'}) \rvert \leq B^{2}\cdot \mathbf{1}\left[\exists, k: i_{k} = i'_{k} \right] \leq B^{2}\sum_{k =1}^{K} \mathbf{1}\left[i_{k} = i'_{k} \right]. \end{align*}$$ Thus $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) &\leq \frac{B^{2}}{N^{2}} \sum_{\mathbf{i}} \sum_{\mathbf{i}'} Z_{\mathbf{i}}Z_{\mathbf{i}'}w_{\mathbf{i}}w_{\mathbf{i}'} \sum_{k = 1}^{K} \mathbf{1}\left[i_{k} = i_{k}' \right] \\ &= \frac{B^{2}}{N^{2}} \sum_{k=1}^{K} \sum_{\mathbf{i}}\sum_{\mathbf{i}'} w_{\mathbf{i}} w_{\mathbf{i}'} Z_{\mathbf{i}}Z_{\mathbf{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right]. \end{align*}$$ Each of the outer summands can be written exactly in terms of $h_k$: 
-$$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\mathbf{i}} \sum_{\mathbf{i}'} w_{\mathbf{i}} w_{\mathbf{i}'}Z_{\mathbf{i}}Z_{\mathbf{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right] &= \frac{B^{2}}{N^{2}} \sum_{j= 1}^{R_{k}} \left(\sum_{\mathbf{i}:, i_k = j} w_{\mathbf{i}}Z_{\mathbf{i}}\right)^{2} \\ 
+By $|\eta_{\boldsymbol{i}}| \leq B$ uniformly bounded, covariate contributions can be bounded via a coordinate-wise union bound, $$\begin{align*} \lvert \mathrm{Cov}(\eta_{\boldsymbol{i}}, \eta_{\boldsymbol{i}'}) \rvert \leq B^{2}\cdot \mathbf{1}\left[\exists, k: i_{k} = i'_{k} \right] \leq B^{2}\sum_{k =1}^{K} \mathbf{1}\left[i_{k} = i'_{k} \right]. \end{align*}$$ Thus $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) &\leq \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'} Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'}w_{\boldsymbol{i}}w_{\boldsymbol{i}'} \sum_{k = 1}^{K} \mathbf{1}\left[i_{k} = i_{k}' \right] \\ &= \frac{B^{2}}{N^{2}} \sum_{k=1}^{K} \sum_{\boldsymbol{i}}\sum_{\boldsymbol{i}'} w_{\boldsymbol{i}} w_{\boldsymbol{i}'} Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right]. \end{align*}$$ Each of the outer summands can be written exactly in terms of $h_k$: 
+$$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'} w_{\boldsymbol{i}} w_{\boldsymbol{i}'}Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right] &= \frac{B^{2}}{N^{2}} \sum_{j= 1}^{R_{k}} \left(\sum_{\boldsymbol{i}:, i_k = j} w_{\boldsymbol{i}}Z_{\boldsymbol{i}}\right)^{2} \\ 
 &= B^{2} \sum_{j = 1}^{R_{k}}\left(\frac{h_{k}(j)}{N}\right)^{2} \\ 
 & \leq B^{2} \tilde{\varepsilon}_{k} \sum_{j =1}^{R_{k}} \frac{h_{k}(j)}{N} \\
 &= B^{2}\tilde{\varepsilon}_{k}, \end{align*}$$ where the third line emerges from maximum bounding, and the last equality uses $\sum_{j} h_k(j) = N$. Summing over $k$, $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) \leq B^{2} \sum_{k=1}^{K} \tilde{\varepsilon}_{k} \to 0 \end{align*}$$ under $\max_{k}\tilde{\varepsilon}_{k} \to 0$. $\blacksquare$
@@ -35,32 +36,32 @@ $$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\mathbf{i}} \sum_{\mathbf{i}'} w_{\ma
 
 > [!corollary] Consistency of Probit $\hat{\gamma}$ Under Row-IPW
 > 
-> Let $\hat{\gamma}$ be any maximizer of $\ell_{\mathrm{all}}(\gamma; w_{\mathbf{i}})$ with row-IPW weights $w_{\mathbf{i}} = N/ [R_{1}N_{1, \mathbf{i}}]$. In addition to the [[Base Assumptions for K-crossed Random Effects with Symmetric Binary Link|base assumptions for the probit $k$-arc model]], assume $\max_{k \neq 1} \tilde{\varepsilon}_{k} \to 0$, where $$\begin{align*} h_k(i_k) = \frac{N}{R_{1}} \sum_{\mathbf{i}:, \mathbf{i}_k = i_k} \frac{Z_{\mathbf{i}}}{N_{1, i_1}}, \qquad \tilde\varepsilon_k = \max_{i_k} h_k(i_k)/N. \end{align*}$$ Then $\hat{\gamma}$ is weakly consistent; that is, $\forall\epsilon > 0$, $$\begin{align*} \mathbb{P}(\left\lvert\left\lvert \hat{\gamma} - \gamma_{0} \right\rvert\right\rvert > \epsilon) \to 0 \end{align*}$$ as $N \to \infty$.
+> Let $\hat{\gamma}$ be any maximizer of $\ell_{\mathrm{all}}(\gamma; w_{\boldsymbol{i}})$ with row-IPW weights $w_{\boldsymbol{i}} = N/ [R_{1}N_{1, \boldsymbol{i}}]$. In addition to the [[Base Assumptions for K-crossed Random Effects with Symmetric Binary Link|base assumptions for the probit $k$-arc model]], assume $\max_{k \neq 1} \tilde{\varepsilon}_{k} \to 0$, where $$\begin{align*} h_k(i_k) = \frac{N}{R_{1}} \sum_{\boldsymbol{i}:, \boldsymbol{i}_k = i_k} \frac{Z_{\boldsymbol{i}}}{N_{1, i_1}}, \qquad \tilde\varepsilon_k = \max_{i_k} h_k(i_k)/N. \end{align*}$$ Then $\hat{\gamma}$ is weakly consistent; that is, $\forall\epsilon > 0$, $$\begin{align*} \mathbb{P}(\left\lvert\left\lvert \hat{\gamma} - \gamma_{0} \right\rvert\right\rvert > \epsilon) \to 0 \end{align*}$$ as $N \to \infty$.
 
 > [!success]- %% %%
 > The proof follows a standard pattern: (1) concentration of the all likelihood, (2) confirming that $\gamma_{0}$ is a maximizer, and (3) ensuring the maximizer is unique.
 > 
-> We first validate concentration with the #cite Lemma. By our assumptions, we clearly need only confirm decay of $h_{1}(i_{1})$ and the appropriate reweighting. Intuitively, $w_{\mathbf{i}}$ weights levels of the first random effect equally; 
+> We first validate concentration with the #cite Lemma. By our assumptions, we clearly need only confirm decay of $h_{1}(i_{1})$ and the appropriate reweighting. Intuitively, $w_{\boldsymbol{i}}$ weights levels of the first random effect equally; 
 > 
-> $$\begin{align*} h_{1}(i_{1}) &= \frac{N}{R_{1}}\sum_{\mathbf{i}: \mathbf{i}_{1}  = i_{1}} \frac{Z_{\mathbf{i}}}{N_{1, i_{1}}} \\ 
+> $$\begin{align*} h_{1}(i_{1}) &= \frac{N}{R_{1}}\sum_{\boldsymbol{i}: \boldsymbol{i}_{1}  = i_{1}} \frac{Z_{\boldsymbol{i}}}{N_{1, i_{1}}} \\ 
 > &= \frac{N}{R_{1}} \cdot \frac{N_{1, i_{1}}}{N_{1, i_{1}}} \\
 > &= \frac{N}{R_{1}}; \end{align*}$$
 > Thus $\sum_{i =1}^{R_{1}} h_{1}(i) = N / R_{1} \cdot R_{1} = N$, and $\max_{i}h_{1}(i) / N = 1/R_{1} \to 0$, so the lemma holds. 
 > 
 > We now show that $\gamma_{0}$ is the unique maximizer of the all likelihood. Note that both $g(\gamma; w) := \lim_{N\to\infty} \mathbb{E}[\ell_{\text{all}}(\gamma;w)/N]$ and $\ell_{\text{all}}(\gamma;w)/N$ are concave in $\gamma$, and we can directly follow the proof of $\gamma$ consistency as given in the original ARC paper [@bellioSupplementaryMaterialConsistent]. In particular, $\nabla_\gamma g(\gamma_0) = 0$ and the Hessian 
-> $$\begin{align*} H := \frac{\partial^{2} g(\gamma_0)}{\partial\gamma,\partial\gamma^\intercal} = -\frac{1}{N}\sum_{\mathbf{i}} w_{\mathbf{i}} x_{\mathbf{i}} x_{\mathbf{i}}^\intercal Z_{\mathbf{i}} ,\mathbb{E}\left\{\frac{\varphi(x_{\mathbf{i}}^\intercal\gamma_0)^2}{\Phi(x_{\mathbf{i}}^\intercal\gamma_0),\Phi(-x_{\mathbf{i}}^\intercal\gamma_0)}\right\} \end{align*}$$ is nontrivially negative definite by the limiting assumption on the $x_{\mathbf{i}}$ structure. Thus $\gamma_0$ is the unique maximizer of a strictly concave function, and we conclude $\hat\gamma \xrightarrow{p} \gamma_0$. $\blacksquare$
+> $$\begin{align*} H := \frac{\partial^{2} g(\gamma_0)}{\partial\gamma,\partial\gamma^\intercal} = -\frac{1}{N}\sum_{\boldsymbol{i}} w_{\boldsymbol{i}} x_{\boldsymbol{i}} x_{\boldsymbol{i}}^\intercal Z_{\boldsymbol{i}} ,\mathbb{E}\left\{\frac{\varphi(x_{\boldsymbol{i}}^\intercal\gamma_0)^2}{\Phi(x_{\boldsymbol{i}}^\intercal\gamma_0),\Phi(-x_{\boldsymbol{i}}^\intercal\gamma_0)}\right\} \end{align*}$$ is nontrivially negative definite by the limiting assumption on the $x_{\boldsymbol{i}}$ structure. Thus $\gamma_0$ is the unique maximizer of a strictly concave function, and we conclude $\hat\gamma \xrightarrow{p} \gamma_0$. $\blacksquare$
 
 ---
 ## Conditions Under which weighting conditions hold.
 We consider some sufficient conditions and worst case behavior of $\tilde{\varepsilon}_{k}$. $\tilde{\varepsilon}_{k}$ is easy to check and reasonably okay to interpret, though we may prefer some digging. 
 ### Sufficient Conditions 
-We first note that $\tilde{\varepsilon}_{k}$ coincides with $\varepsilon_{k}$ when $w_{\mathbf{i}} \equiv 1$. 
+We first note that $\tilde{\varepsilon}_{k}$ coincides with $\varepsilon_{k}$ when $w_{\boldsymbol{i}} \equiv 1$. 
 #### Row-IPW 
 We first look at what needs to be true (in addition to standard slice decay condition $\varepsilon_{k\neq 1}\to 0$) in order for $\tilde{\varepsilon}_{k}\to 0$ for all $k$ under first slice inverse-proportion weighting. It is easy to see that the above is not sufficient. We have already shown that this implies $\tilde{\varepsilon}_{1} \to 0$. Let us look at $\tilde{\varepsilon}_{2}$ without loss of generality. 
 
 Written explicity, we have
-$$\begin{align*} \frac{h_{2}(j)}{N} &= \frac{1}{R_{1}} \sum_{\mathbf{i}: \mathbf{i}[2] = j} N_{1, \mathbf{i}[1]}^{-1} \\
-&= \frac{1}{R_{1}} \sum_{i =1 }^{R_{1}} \sum_{\mathbf{i}: \mathbf{i}[2] = j} N_{1, i}^{-1} \mathbf{1}\left[\mathbf{i}[1] = i \right] 
+$$\begin{align*} \frac{h_{2}(j)}{N} &= \frac{1}{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, \boldsymbol{i}[1]}^{-1} \\
+&= \frac{1}{R_{1}} \sum_{i =1 }^{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, i}^{-1} \mathbf{1}\left[\boldsymbol{i}[1] = i \right] 
 \end{align*}$$
 a candidate of the $\tilde{\varepsilon}_{2}$ maximum. Note by definition of $N_{1,i}$ that the inner sum is at most 1, since there can be at most $N_{1, i}$ observations whose first index is $i$. 
 
@@ -76,7 +77,7 @@ The above motivates a counterexample when $\kappa_{2} > \kappa_{1}$.
 > [!example] Catastrophic Weighting Outcome Under Row IPW - Big Row.
 > 
 > Let half of our observations come from one level $i^{\star}$ of the first random effect, and let all other levels see exactly two observations. When $\kappa_{2} > \kappa_{1}$, we are able to observe a "large" level $j^{\star}$ which can grow as $N^{\tilde{\kappa}}$, which clearly satisfies the slice decay condition $\varepsilon_{2} \to 0$. For large $N$, $N^{\tilde{\kappa}} > 2N^{\kappa_{1}}$, so $j^{\star}$ can eventually always "fill" all of the non-$i^{\star}$ rows. When we let such a thing occur, then 
-> $$\begin{align*} \frac{h_{2}(j^{\star})}{N} \leq \frac{1}{R_{1}}\sum_{i \neq i^{\star}} \sum_{\mathbf{i}: \mathbf{i}[2] = j^{\star}} N_{1, i}^{-1} \mathbf{1}\left[\mathbf{i}[1] = i \right]  = \frac{R_{1} - 1}{R_{1}} \to  1,  \end{align*}$$
+> $$\begin{align*} \frac{h_{2}(j^{\star})}{N} \leq \frac{1}{R_{1}}\sum_{i \neq i^{\star}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j^{\star}} N_{1, i}^{-1} \mathbf{1}\left[\boldsymbol{i}[1] = i \right]  = \frac{R_{1} - 1}{R_{1}} \to  1,  \end{align*}$$
 > which clearly violates the decay condition for $\tilde{\varepsilon}_{2}$. 
 
 It is informative that the above counterexample fails for uniform levels; if rows are of uniform size, ie. $N_{1, i} = N^{1 - \kappa_{1}}$ for all $i$, then $j^{\star}$ can "fill" $N^{\tilde{\kappa} + \kappa_{1} - 1}$ levels so that

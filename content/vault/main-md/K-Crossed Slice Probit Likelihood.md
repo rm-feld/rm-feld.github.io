@@ -1,23 +1,24 @@
 ---
-modified: 2026-05-04T13:28:00-07:00
+modified: 2026-07-09
 created: 2026-04-20T13:54:36-07:00
+tags: [genai/claude]
 ---
 Let $\mathcal{K}, \overline{\mathcal{K}}$ be disjoint with $\mathcal{K}\cup \overline{\mathcal{K}} = [K]$.  By component independence, we can decompose variance as $\sigma^{2} = \sigma^{2}_{(\mathcal{K})} + \sigma^{2}_{(\overline{\mathcal{K}})}$, for 
 
-$$\begin{align*} \sigma_{(\mathcal{K})}^{2} := \sum_{\mathcal{K}' \subseteq \mathcal{K}, \mathcal{K} \in \mathcal{A}} \sigma^{2}_{\mathcal{K'}}. \end{align*}$$
+$$\begin{align*} \sigma_{(\mathcal{K})}^{2} := \sum_{\mathcal{K}' \subseteq \mathcal{K}, \mathcal{K} \in \mathbb{A}} \sigma^{2}_{\mathcal{K'}}. \end{align*}$$
 Note the use of parentheses to differentiate from the interaction terms indexed by $\mathcal{K}$.
 
 Throughout, we use the shortand 
-$$\begin{align*} a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} = \sum_{\mathcal{K}' \subseteq \mathcal{K}, \mathcal{K}' \in \mathcal{A}} a_{\ell, \mathcal{K}'}. \end{align*}$$
+$$\begin{align*} a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} = \sum_{\mathcal{K}' \subseteq \mathcal{K}, \mathcal{K}' \in \mathbb{A}} a_{\ell, \mathcal{K}'}. \end{align*}$$
 
 
-$$\begin{align*} \mathbb{P}(Y_{\ell} = y_{\ell} \mid x_{\ell}, a_{\ell}[\mathcal{K}]) &= \mathbb{P}\left( \tilde{y}_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}^{\intercal}\mathbf{1} + \varepsilon_{\ell} > 0 \right] \right) \\ 
-&= \mathbb{P}\left( \tilde{y}_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal} \mathbf{1} + a_{\ell}[\overline{\mathcal{K}}]^{\intercal} \mathbf{1} + \varepsilon_{\ell}  \right] > 0\right) \\ 
-&= \mathbb{P}\left( \tilde{y}_{\ell} \left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} + \xi \sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} +  \sigma^{2}_{E}} \right] > 0\right) \\ 
-&= \Phi\left( \frac{\tilde{y}_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} \right]}{\sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }}  \right) \\ 
-&= \Phi\left( \frac{\tilde{y}_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} \right]}{\sqrt{\sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }} \cdot \frac{\sqrt{ \sigma^{2}_{(\mathcal{K})} + \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }}{\sqrt{ \sigma^{2}_{(\mathcal{K})} + \sigma^{2}_{(\overline{\mathcal{K}})}+ \sigma^{2}_{E}  }} \right) \\ 
-&:= \Phi\left(\tilde{y}_{\ell}x_{\ell}^{\intercal}\gamma \sqrt{ 1 + \tau^{2}_{\mathcal{K}} } + \frac{a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1}}{\sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }} \right) \\
-&:= \Phi\left( \tilde{y}_{\ell}x_{\ell}^{\intercal}\gamma_{\mathcal{K}} + \tau_{\mathcal{K}} u_{\boldsymbol{j}}\right),
+$$\begin{align*} \mathbb{P}(Y_{\ell} = y_{\ell} \mid x_{\ell}, a_{\ell}[\mathcal{K}]) &= \mathbb{P}\left( y_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}^{\intercal}\mathbf{1} + \varepsilon_{\ell} > 0 \right] \right) \\ 
+&= \mathbb{P}\left( y_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal} \mathbf{1} + a_{\ell}[\overline{\mathcal{K}}]^{\intercal} \mathbf{1} + \varepsilon_{\ell}  \right] > 0\right) \\ 
+&= \mathbb{P}\left( y_{\ell} \left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} + \xi \sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} +  \sigma^{2}_{E}} \right] > 0\right) \\ 
+&= \Phi\left( \frac{y_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} \right]}{\sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }}  \right) \\ 
+&= \Phi\left( \frac{y_{\ell}\left[ x_{\ell}^{\intercal}\beta + a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} \right]}{\sqrt{\sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }} \cdot \frac{\sqrt{ \sigma^{2}_{(\mathcal{K})} + \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }}{\sqrt{ \sigma^{2}_{(\mathcal{K})} + \sigma^{2}_{(\overline{\mathcal{K}})}+ \sigma^{2}_{E}  }} \right) \\ 
+&:= \Phi\left(y_{\ell}x_{\ell}^{\intercal}\gamma \sqrt{ 1 + \tau^{2}_{\mathcal{K}} } + \frac{a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1}}{\sqrt{ \sigma^{2}_{(\overline{\mathcal{K}})} + \sigma^{2}_{E} }} \right) \\
+&:= \Phi\left( y_{\ell}x_{\ell}^{\intercal}\gamma_{\mathcal{K}} + \tau_{\mathcal{K}} u_{\boldsymbol{j}}\right),
 \end{align*}$$
 
 where $\gamma_{\mathcal{K}_0} = \gamma \sqrt{ 1 + \tau^{2}_{\mathcal{K}} }$ and $u_{\boldsymbol{j}} = a_{\ell}[\mathcal{K}]^{\intercal}\mathbf{1} / \tau_{\mathcal{K}}$ ($\boldsymbol{j}:= \boldsymbol{i}_{\ell}[\mathcal{K}]$) for 

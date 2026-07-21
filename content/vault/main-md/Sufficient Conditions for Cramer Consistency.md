@@ -1,6 +1,7 @@
 ---
-modified: 2026-05-05T13:22:48-07:00
+modified: 2026-07-09
 created: 2026-05-04T14:33:21-07:00
+tags: [genai/claude]
 ---
 
 > [!info] Update (2026-07-01)
@@ -11,7 +12,7 @@ The [[Cramer Consistency of Slice Likelihood for K-Crossed Random Effects Probit
 
 %% -- BEGIN NOTES TO EXPAND -- %%
 **MIX OF SUFFICIENT CONDITION + MORE GENERAL THOUGHTS ON HIGH CARDINALITY REGIME**
-- I'm not sure $\max_{\mathcal{K} \in \mathcal{A}} \epsilon_{k} \to 0$ for $\epsilon_{\mathcal{K}} = \max_{\boldsymbol{j} \in \mathcal{S}[\mathcal{K}]} N_{\boldsymbol{j}, \mathcal{K}} / N$ is sufficient, since this is a regime where we need more observations
+- I'm not sure $\max_{\mathcal{K} \in \mathbb{A}} \epsilon_{k} \to 0$ for $\epsilon_{\mathcal{K}} = \max_{\boldsymbol{j} \in \mathcal{S}[\mathcal{K}]} N_{\boldsymbol{j}, \mathcal{K}} / N$ is sufficient, since this is a regime where we need more observations
 - I think (like the big rows thing) there's going to be a saturation of some estimands if $\kappa_{k} < \kappa_{k'}$ by a sufficiently large margin; eg. if there are just many less levels of category $k$ then $k'$, then perhaps there are enough observations for direct reasonable estimability of the corresponding effects 
 - Big issue 1 is curse of dimensionality-type "crosses make everything small"; under a uniformity in sampling over $\mathcal{S}$ (not $\mathcal{S}_{0}$), in $K = 3$, the expected number of observations, 
 	- a slice over $(i, j)$ should expect $\sim N^{\kappa_{1} + \kappa_{2} - \kappa_{3}}$ unique observations, a slice over $k$ should expect $N^{\kappa_{3}  - \kappa_{2} - \kappa_{1}}$, but not sure if i'm delineating between $i$ and $j$ here 

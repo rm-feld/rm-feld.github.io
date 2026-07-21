@@ -1,7 +1,8 @@
 ---
-modified: 2026-07-08T03:07:36-07:00
+modified: 2026-07-13T17:41:21-07:00
 created: 2026-07-07T21:24:18-07:00
 ---
+
 # $K$ Random Effects
 - [[Notation Alignment with Standard ARC (K = 2)]]
 - [[Notation Alignment with Standard ARC (K = 3)]]
@@ -9,6 +10,7 @@ created: 2026-07-07T21:24:18-07:00
 - older focus on specific parametrization regimes (without interaction terms)
 	- [[Negation Form for Probit Regression]]
 	- [[Single Factorization Writeup]]
+
 # Multivariate
 - [[Multivariate Writeup 1 (realign)]]
 - [[Multivariate Response]]

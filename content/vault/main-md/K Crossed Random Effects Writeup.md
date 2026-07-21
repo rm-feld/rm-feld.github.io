@@ -1,12 +1,13 @@
 ---
-modified: 2026-07-07T23:40:16-07:00
+modified: 2026-07-09
 created: 2026-04-13T08:20:25-07:00
+tags: [genai/claude]
 ---
 # Notation and Model Definition 
 ![[Initial Notation for K crossed random effects]]
 
 ## Notation Alignment with ARC 
-We give the logic heuristics and equivalent objects of interest between the new notation and the previous notation, for $K = 3$. We also include some preview of the interaction results, as relevant for $\mathcal{A}$. 
+We give the logic heuristics and equivalent objects of interest between the new notation and the previous notation, for $K = 3$. We also include some preview of the interaction results, as relevant for $\mathbb{A}$. 
 
 ![[Notation Alignment with Standard ARC (K = 3)]]
 
@@ -17,7 +18,7 @@ We give the logic heuristics and equivalent objects of interest between the new 
 
 
 ### Singular Factorization 
-We now work more specifically on the classical no-interactions subcase, so that $\mathcal{A} = \mathcal{A}_{1}$. 
+We now work more specifically on the classical no-interactions subcase, so that $\mathbb{A} = \mathbb{A}_{1}$. 
 
 ![[K-Crossed Slice Probit (Singular)]]
 ### Interaction Terms 

@@ -1,7 +1,7 @@
 ---
-modified: 2026-07-07T21:23:30-07:00
+modified: 2026-07-09
 created: 2026-05-25T16:51:46-07:00
-tags: [update-notation]
+tags: [update-notation, genai/claude]
 ---
 **Here, letting everything be the signed version**
 
@@ -11,14 +11,14 @@ $$\begin{align*} B^{\intercal} = \begin{pmatrix}
 \end{pmatrix}, \end{align*}$$
 $B\in\mathbb{R}^{2\times (p + 1)}$, with 
 
-$$\begin{align*} Y_{\ell} := \begin{pmatrix}
-\tilde{Y}_{\ell} \\ \tilde{Y}_{\ell}'
-\end{pmatrix}  &= \mathbf{1}\left[\begin{pmatrix}
+$$\begin{align*} \boldsymbol{Y}_{\ell} := \begin{pmatrix}
+Y_{\ell} \\ Y_{\ell}'
+\end{pmatrix}  &= 2\cdot\mathbf{1}\left[\begin{pmatrix}
 x_{\ell}^{\intercal}\tilde{\beta} + \mathbf{1}_{|\mathbb{A}|}^{\intercal}\tilde{a}_{\boldsymbol{i}(\ell)} + \tilde{\varepsilon} \\ x_{\ell}^{\intercal}\tilde{\beta}' + \mathbf{1}_{|\mathbb{A}|}^{\intercal} \tilde{a}_{\boldsymbol{i}(\ell)}' + \tilde{\varepsilon}'
 \end{pmatrix} > \begin{pmatrix}
 0 \\ 0
-\end{pmatrix} \right],  \end{align*}$$
-with the indicator taken component-wise. 
+\end{pmatrix} \right] - \begin{pmatrix} 1 \\ 1 \end{pmatrix},  \end{align*}$$
+with the indicator (and subtraction) taken component-wise, so $Y_{\ell}, Y_{\ell}' \in \left\{ -1, +1 \right\}$ directly. 
 
  $1:x^circ:x$
 
@@ -44,8 +44,8 @@ We vectorize in bold, ie. $\boldsymbol{\tilde{\rho}}$, $\boldsymbol{\tilde{\sigm
 
 Then 
 
-$$\begin{align*} \mathbb{P}(\tilde{Y}_{\ell} = \tilde{y}_{\ell}, \tilde{Y}_{\ell}' = \tilde{y}'_{\ell}) &= \mathbb{P}\left( \begin{pmatrix}
-\tilde{y}_{\ell} \\ \tilde{y}_{\ell}'
+$$\begin{align*} \mathbb{P}(Y_{\ell} = y_{\ell}, Y_{\ell}' = y'_{\ell}) &= \mathbb{P}\left( \begin{pmatrix}
+y_{\ell} \\ y_{\ell}'
 \end{pmatrix} \odot  \left\{ \begin{pmatrix}
 x_{\ell}^{\intercal}\tilde{\beta} \\ x_{\ell}^{\intercal}\tilde{\beta}'
 \end{pmatrix} + \begin{pmatrix}
@@ -53,7 +53,7 @@ x_{\ell}^{\intercal}\tilde{\beta} \\ x_{\ell}^{\intercal}\tilde{\beta}'
 \end{pmatrix} \right\}  > \begin{pmatrix}
  0 \\ 0
 \end{pmatrix}\right)  \\ &= \mathbb{P}\left( \begin{pmatrix}
-\tilde{y}_{\ell} \\ \tilde{y}_{\ell}'
+y_{\ell} \\ y_{\ell}'
 \end{pmatrix} \odot  \left\{ \begin{pmatrix}
 x_{\ell}^{\intercal}\tilde{\beta} \\ x_{\ell}^{\intercal}\tilde{\beta}'
 \end{pmatrix} + \begin{pmatrix}
@@ -62,12 +62,12 @@ x_{\ell}^{\intercal}\tilde{\beta} \\ x_{\ell}^{\intercal}\tilde{\beta}'
 0 \\ 0
 \end{pmatrix} \right) \\ 
 &= \mathbb{P}\left( \xi_{\tilde{r}} > -\begin{pmatrix}
-\tilde{y}_{\ell} x_{\ell}^{\intercal}\tilde{\beta} / \sqrt{ \mathbf{1}_{|\mathbb{A}|}^{\intercal} \boldsymbol{\tilde{\sigma}^{2}} + \tilde{\sigma}^{2}_{E}   }  \\ \tilde{y}_{\ell}' x_{\ell}^{\intercal}\tilde{\beta}' / \sqrt{ \mathbf{1}_{|\mathbb{A}|}^{\intercal}\boldsymbol{\tilde{\sigma}'^{2}} + \tilde{\sigma}'^{2}_{E} }
+y_{\ell} x_{\ell}^{\intercal}\tilde{\beta} / \sqrt{ \mathbf{1}_{|\mathbb{A}|}^{\intercal} \boldsymbol{\tilde{\sigma}^{2}} + \tilde{\sigma}^{2}_{E}   }  \\ y_{\ell}' x_{\ell}^{\intercal}\tilde{\beta}' / \sqrt{ \mathbf{1}_{|\mathbb{A}|}^{\intercal}\boldsymbol{\tilde{\sigma}'^{2}} + \tilde{\sigma}'^{2}_{E} }
 \end{pmatrix}   \right) \\ 
 &=: \mathbb{P}\left( \xi_{\tilde{r}} > - \begin{pmatrix}
- \tilde{y}_{\ell} x_{\ell}^{\intercal} \tilde{\gamma} \\ \tilde{y}_{\ell}'x_{\ell}^{\intercal} \tilde{\gamma}'
+ y_{\ell} x_{\ell}^{\intercal} \tilde{\gamma} \\ y_{\ell}'x_{\ell}^{\intercal} \tilde{\gamma}'
 \end{pmatrix} \right)  \\
-&=: \Phi_{2}(\tilde{\eta}_{\ell}, \tilde{\eta}_{\ell}' ; \tilde{y}_{\ell} \tilde{y}_{\ell}' \tilde{r}), 
+&=: \Phi_{2}(\tilde{\eta}_{\ell}, \tilde{\eta}_{\ell}' ; y_{\ell} y_{\ell}' \tilde{r}), 
 \end{align*}$$
 
 where 
@@ -76,10 +76,10 @@ and
 
 
 We thus define the pairwise likelihood as
-$$\begin{align*} L_{\text{pair}} \left(\tilde{\gamma}, \tilde{\gamma}', \tilde{r}; \left\{ \tilde{Y}_{\ell} \right\}_{\ell = 1}^{N}, \left\{ \tilde{Y}_{\ell}' \right\} _{\ell = 1}^{N} \right) := \prod_{\ell =1}^{N} \Phi_{2}\left( \tilde{Y}_{\ell}x_{\ell}^{\intercal} \tilde{\gamma}, \tilde{Y}_{\ell}'x_{\ell}^{\intercal}\tilde{\gamma}'; \tilde{Y}_{\ell} \tilde{Y}_{\ell}' \tilde{r} \right),  \end{align*}$$
+$$\begin{align*} L_{\text{pair}} \left(\tilde{\gamma}, \tilde{\gamma}', \tilde{r}; \left\{ Y_{\ell} \right\}_{\ell = 1}^{N}, \left\{ Y_{\ell}' \right\} _{\ell = 1}^{N} \right) := \prod_{\ell =1}^{N} \Phi_{2}\left( Y_{\ell}x_{\ell}^{\intercal} \tilde{\gamma}, Y_{\ell}'x_{\ell}^{\intercal}\tilde{\gamma}'; Y_{\ell} Y_{\ell}' \tilde{r} \right),  \end{align*}$$
 So that 
 
-$$\begin{align*} L_{mm'}(\gamma[m], \gamma[m'], r[m, m']) := L_{\text{pair}}\left(\gamma [m], \gamma[m'], r[m, m']; \left\{ \tilde{Y}_{\ell}[m] \right\}_{\ell = 1}^{N}, \left\{ \tilde{Y}_{\ell}[m'] \right\}_{\ell = 1}^{N}  \right).  \end{align*}$$
+$$\begin{align*} L_{mm'}(\gamma[m], \gamma[m'], r[m, m']) := L_{\text{pair}}\left(\gamma [m], \gamma[m'], r[m, m']; \left\{ Y_{\ell}[m] \right\}_{\ell = 1}^{N}, \left\{ Y_{\ell}[m'] \right\}_{\ell = 1}^{N}  \right).  \end{align*}$$
 
 We thus have a natural composite likelihood 
 

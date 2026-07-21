@@ -1,6 +1,7 @@
 ---
-modified: 2026-05-04T12:18:54-07:00
+modified: 2026-07-09
 created: 2026-04-20T15:08:43-07:00
+tags: [genai/claude]
 ---
 
 Under the structure of [[K-Crossed Slice Probit (Singular)|the derived slice likelihood]], we can take in particular $\mathcal{K} = \left\{ k \right\}$. In this case, 
@@ -20,4 +21,4 @@ $$\begin{align*} \rho_{k} &= \frac{\sigma^{2}_{k} / [\sigma^{2} - \sigma^{2}_{k}
 What is important in this regime is that $\psi = \left( \gamma ^{\intercal}, \rho_{1}, \dots, \rho_{K} \right)^{\intercal}$ is a valid reparameterization of $\theta$. From $\sum_{k=1}^{K} \rho_{k} = 1 - \sigma^{2}_{E} / \sigma^{2}$, we can recover $\theta$ by 
 $$\begin{align*} \sigma^{2} = \frac{\sigma^{2}_{E}}{1 - \sum_{k=1}^{K} \rho_{k}}, \qquad \sigma^{2}_{k} = \rho_{k} \sigma^{2}, \qquad \beta =\gamma / \sigma.  \end{align*}$$
 
-Thus we can evaluate slice likelihoods over $\mathcal{K} \in \mathcal{A}_{1}$ to determine component-wise variances. 
+Thus we can evaluate slice likelihoods over $\mathcal{K} \in \mathbb{A}_{1}$ to determine component-wise variances. 
