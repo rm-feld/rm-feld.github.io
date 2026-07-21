@@ -24,10 +24,7 @@ tags: [genai/claude]
 **Proof.**
 
 By $|\eta_{\boldsymbol{i}}| \leq B$ uniformly bounded, covariate contributions can be bounded via a coordinate-wise union bound, $$\begin{align*} \lvert \mathrm{Cov}(\eta_{\boldsymbol{i}}, \eta_{\boldsymbol{i}'}) \rvert \leq B^{2}\cdot \mathbf{1}\left[\exists, k: i_{k} = i'_{k} \right] \leq B^{2}\sum_{k =1}^{K} \mathbf{1}\left[i_{k} = i'_{k} \right]. \end{align*}$$ Thus $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) &\leq \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'} Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'}w_{\boldsymbol{i}}w_{\boldsymbol{i}'} \sum_{k = 1}^{K} \mathbf{1}\left[i_{k} = i_{k}' \right] \\ &= \frac{B^{2}}{N^{2}} \sum_{k=1}^{K} \sum_{\boldsymbol{i}}\sum_{\boldsymbol{i}'} w_{\boldsymbol{i}} w_{\boldsymbol{i}'} Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right]. \end{align*}$$ Each of the outer summands can be written exactly in terms of $h_k$: 
-$$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'} w_{\boldsymbol{i}} w_{\boldsymbol{i}'}Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right] &= \frac{B^{2}}{N^{2}} \sum_{j= 1}^{R_{k}} \left(\sum_{\boldsymbol{i}:, i_k = j} w_{\boldsymbol{i}}Z_{\boldsymbol{i}}\right)^{2} \\ 
-&= B^{2} \sum_{j = 1}^{R_{k}}\left(\frac{h_{k}(j)}{N}\right)^{2} \\ 
-& \leq B^{2} \tilde{\varepsilon}_{k} \sum_{j =1}^{R_{k}} \frac{h_{k}(j)}{N} \\
-&= B^{2}\tilde{\varepsilon}_{k}, \end{align*}$$ where the third line emerges from maximum bounding, and the last equality uses $\sum_{j} h_k(j) = N$. Summing over $k$, $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) \leq B^{2} \sum_{k=1}^{K} \tilde{\varepsilon}_{k} \to 0 \end{align*}$$ under $\max_{k}\tilde{\varepsilon}_{k} \to 0$. $\blacksquare$
+$$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'} w_{\boldsymbol{i}} w_{\boldsymbol{i}'}Z_{\boldsymbol{i}}Z_{\boldsymbol{i}'} \mathbf{1}\left[i_{k} = i_{k}' \right] &= \frac{B^{2}}{N^{2}} \sum_{j= 1}^{R_{k}} \left(\sum_{\boldsymbol{i}:, i_k = j} w_{\boldsymbol{i}}Z_{\boldsymbol{i}}\right)^{2} \\ &= B^{2} \sum_{j = 1}^{R_{k}}\left(\frac{h_{k}(j)}{N}\right)^{2} \\ & \leq B^{2} \tilde{\varepsilon}_{k} \sum_{j =1}^{R_{k}} \frac{h_{k}(j)}{N} \\ &= B^{2}\tilde{\varepsilon}_{k}, \end{align*}$$ where the third line emerges from maximum bounding, and the last equality uses $\sum_{j} h_k(j) = N$. Summing over $k$, $$\begin{align*} \mathrm{Var}\left( \frac{\ell_{\text{all}}(\gamma; w)}{N} \right) \leq B^{2} \sum_{k=1}^{K} \tilde{\varepsilon}_{k} \to 0 \end{align*}$$ under $\max_{k}\tilde{\varepsilon}_{k} \to 0$. $\blacksquare$
 
 **Remark.** Besides observation structure, the lemma requires only uniformly bounded marginal log-likelihood, and is otherwise agnostic to the link. Thus after verifying the new slice decay conditions $\max_{k}\tilde{\varepsilon}_{k}\to 0$, we need only consider if the maximizer of $\ell_{\text{all}}(\gamma;w)$ is unique and identifiable to conclude weak consistency of $\hat{\gamma}$. This argument also holds if $\gamma$ is unavailable; our uniqueness statements simply shift to that of $(\beta, \sigma)$. $\square$ 
 
@@ -43,9 +40,7 @@ $$\begin{align*} \frac{B^{2}}{N^{2}} \sum_{\boldsymbol{i}} \sum_{\boldsymbol{i}'
 > 
 > We first validate concentration with the #cite Lemma. By our assumptions, we clearly need only confirm decay of $h_{1}(i_{1})$ and the appropriate reweighting. Intuitively, $w_{\boldsymbol{i}}$ weights levels of the first random effect equally; 
 > 
-> $$\begin{align*} h_{1}(i_{1}) &= \frac{N}{R_{1}}\sum_{\boldsymbol{i}: \boldsymbol{i}_{1}  = i_{1}} \frac{Z_{\boldsymbol{i}}}{N_{1, i_{1}}} \\ 
-> &= \frac{N}{R_{1}} \cdot \frac{N_{1, i_{1}}}{N_{1, i_{1}}} \\
-> &= \frac{N}{R_{1}}; \end{align*}$$
+> $$\begin{align*} h_{1}(i_{1}) &= \frac{N}{R_{1}}\sum_{\boldsymbol{i}: \boldsymbol{i}_{1}  = i_{1}} \frac{Z_{\boldsymbol{i}}}{N_{1, i_{1}}} \\ &= \frac{N}{R_{1}} \cdot \frac{N_{1, i_{1}}}{N_{1, i_{1}}} \\ &= \frac{N}{R_{1}}; \end{align*}$$
 > Thus $\sum_{i =1}^{R_{1}} h_{1}(i) = N / R_{1} \cdot R_{1} = N$, and $\max_{i}h_{1}(i) / N = 1/R_{1} \to 0$, so the lemma holds. 
 > 
 > We now show that $\gamma_{0}$ is the unique maximizer of the all likelihood. Note that both $g(\gamma; w) := \lim_{N\to\infty} \mathbb{E}[\ell_{\text{all}}(\gamma;w)/N]$ and $\ell_{\text{all}}(\gamma;w)/N$ are concave in $\gamma$, and we can directly follow the proof of $\gamma$ consistency as given in the original ARC paper [@bellioSupplementaryMaterialConsistent]. In particular, $\nabla_\gamma g(\gamma_0) = 0$ and the Hessian 
@@ -60,9 +55,7 @@ We first note that $\tilde{\varepsilon}_{k}$ coincides with $\varepsilon_{k}$ wh
 We first look at what needs to be true (in addition to standard slice decay condition $\varepsilon_{k\neq 1}\to 0$) in order for $\tilde{\varepsilon}_{k}\to 0$ for all $k$ under first slice inverse-proportion weighting. It is easy to see that the above is not sufficient. We have already shown that this implies $\tilde{\varepsilon}_{1} \to 0$. Let us look at $\tilde{\varepsilon}_{2}$ without loss of generality. 
 
 Written explicity, we have
-$$\begin{align*} \frac{h_{2}(j)}{N} &= \frac{1}{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, \boldsymbol{i}[1]}^{-1} \\
-&= \frac{1}{R_{1}} \sum_{i =1 }^{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, i}^{-1} \mathbf{1}\left[\boldsymbol{i}[1] = i \right] 
-\end{align*}$$
+$$\begin{align*} \frac{h_{2}(j)}{N} &= \frac{1}{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, \boldsymbol{i}[1]}^{-1} \\ &= \frac{1}{R_{1}} \sum_{i =1 }^{R_{1}} \sum_{\boldsymbol{i}: \boldsymbol{i}[2] = j} N_{1, i}^{-1} \mathbf{1}\left[\boldsymbol{i}[1] = i \right] \end{align*}$$
 a candidate of the $\tilde{\varepsilon}_{2}$ maximum. Note by definition of $N_{1,i}$ that the inner sum is at most 1, since there can be at most $N_{1, i}$ observations whose first index is $i$. 
 
 Here is some logic to follow. If $j$ is completely nested under some $i$, then 
