@@ -21,9 +21,9 @@ For binary response, **question acceptance** serves as an interesting starting p
 An interesting feature of SE is that the asker can "accept" at most one answer that they receive for a question, which is meant to be an indication of the "best" of the received answers. If there is no best answer, or the asker abandons the question, there may not be an accepted answer. This may motivate the question: **what types of question-answer pairs are viable acceptance targets?**
 
 Let $i \in I$ index the asker, $j \in J$ index the answerer, and $k \in K$ index the tag. For covariates $x_{ijk}$ to be derived, we can imagine a [[K-Crossed Random Effects Model|binary crossed random effects model]] defined by pairs $(x_{ijk}, Y_{ijk})$ for which
-$$\begin{align*} Y_{ijk} = \mathbf{1}\left[ \text{answerer } i \text{ accepted the answer of answerer } j \text{ on the question with tag } k \text{ with covariates } x_{ijk}\right]  \end{align*}$$
+$$\begin{aligned} Y_{ijk} = \mathbf{1}\left[ \text{answerer } i \text{ accepted the answer of answerer } j \text{ on the question with tag } k \text{ with covariates } x_{ijk}\right]  \end{aligned}$$
 with 
-$$\begin{align*} \mathbb{P}(Y_{ijk} = 1) = g^{-1}\left( x_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} \right) \end{align*}$$
+$$\begin{aligned} \mathbb{P}(Y_{ijk} = 1) = g^{-1}\left( x_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} \right) \end{aligned}$$
 given [[Link Function|link function]] $g$. 
 
 We note first that natural interpretations exist for the random effects:

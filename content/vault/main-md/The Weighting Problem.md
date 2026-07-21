@@ -10,7 +10,7 @@ When we loosen the index balance condition above, we need to consider a reweight
 So we need to reweight. Let us do this more generically; sticking to two random effects, let us have at least one asymptotically nontrivial weight among $\delta \in [0, 1]^{J} \subseteq \mathbb{R}^{J}$  indexed by components $\delta_{j} = N_{\bullet j} / N$. The issue is this; optimal reweighting takes into account variance $\sigma^{2}_{B}$ and $\sigma^{2}_{A}$ to do some sort of column-level inverse-variance weighting. 
 
 I think the natural naïve iteration is this; linearity gives consistency to the inverse proportion reweighting that makes column contributions equivalent. I can begin by fitting the log likelihood optimization of $\hat{\gamma}$ in the weighted regime,
-$$\begin{align} \ell(\hat{\gamma}) = \sum_{j = 1}^{J}w_{j} \ell_{j \bullet} \end{align}$$
+$$\begin{aligned} \ell(\hat{\gamma}) = \sum_{j = 1}^{J}w_{j} \ell_{j \bullet} \end{aligned}$$
 for $w_{j} = 1 / N_{\bullet j}$, which I reiterate nets a consistent estimator of $\hat{\gamma}$. Then this $\hat{\gamma}$ lets me solve for $\hat{\sigma}^{2}_{B}$ and $\hat{\sigma}^{2}_{A}$. In turn, I re-solve for $\hat{\gamma}$ with weights
-$$\begin{align} w_{j} \propto \frac{1}{1 + (N_{\bullet j} - 1)\hat{\tau}^{2}_{B}}; \end{align}$$
+$$\begin{aligned} w_{j} \propto \frac{1}{1 + (N_{\bullet j} - 1)\hat{\tau}^{2}_{B}}; \end{aligned}$$
 it seems reasonable to assume a conversion of this kind of iterative process without much worry, though I don't know what theory would justify it. 

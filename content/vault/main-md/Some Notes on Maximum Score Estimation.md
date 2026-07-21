@@ -36,9 +36,9 @@ The **(many-to-many) Matching Problem** seems to echo *some* of the setup of the
 Towards this goal, [[@foxToolkitMatchingMaximum]] defines an objective which we simplify in the (linear response, one-market) case with the following logic. 
 
 Let $x_{ij}$ be derivable as a function of $(i, j)$, and let $\mathcal{X}= \left\{ (i, j) \mid y_{ij} = 1 \right\}$ be the observed matches. The idea is that, because acceptance probability is supposed to agree in rank with the fixed predictor, we should be awarding choices of $\beta$ for which the "fixed-predictor" payout under the true observed matches is higher than some other candidate match. Let 
-$$\begin{align*} \mathcal{X}_{i}^{C} = \left\{ j \in J: y_{ij} \neq 1 \right\}, \qquad \mathcal{X}_{i} = \left\{ j \in J: y_{ij} = 1 \right\}  . \end{align*}$$
+$$\begin{aligned} \mathcal{X}_{i}^{C} = \left\{ j \in J: y_{ij} \neq 1 \right\}, \qquad \mathcal{X}_{i} = \left\{ j \in J: y_{ij} = 1 \right\}  . \end{aligned}$$
 and for ease of notation assume that all $i \in I$ participate in the market (every product $i$ is bought buy some $j$) so that $\left\{ \mathcal{X}_{i}^{C} \right\}_{i \in I}$ forms a partition over all counterfactual purchase events, and make the analogous statement for the natural $\mathcal{X}_{j}, \mathcal{X}_{j}^{C}$. The objective in this case can be written as 
-$$\begin{align*} Q(\beta) = \sum_{i \in I} \sum_{j \in \mathcal{X}_{i}} \sum_{j' \in \mathcal{X}_{i}^{C}} \mathbf{1}\left[x_{ij}^{\intercal}\beta > x_{ij'}^{\intercal}\beta \right] + \sum_{j \in J} \sum_{i \in \mathcal{X}_{j}}\sum_{i' \in \mathcal{X}_{j}^{C}} \mathbf{1}\left[x_{ij}^{\intercal}\beta > x_{i'j}^{\intercal}\beta \right]  \end{align*}$$
+$$\begin{aligned} Q(\beta) = \sum_{i \in I} \sum_{j \in \mathcal{X}_{i}} \sum_{j' \in \mathcal{X}_{i}^{C}} \mathbf{1}\left[x_{ij}^{\intercal}\beta > x_{ij'}^{\intercal}\beta \right] + \sum_{j \in J} \sum_{i \in \mathcal{X}_{j}}\sum_{i' \in \mathcal{X}_{j}^{C}} \mathbf{1}\left[x_{ij}^{\intercal}\beta > x_{i'j}^{\intercal}\beta \right]  \end{aligned}$$
 *(though I think I may be introducing some double counting to be subtracted out here).*
 
 # Extensions to Maximum Score
@@ -72,9 +72,9 @@ Random slopes is perhaps the immediate one that comes to mind…
 ## Random Slopes 
 If we are not in the crossed regime, then 
 
-$$\begin{align*} Y_{i} = \mathbf{1}\left[x_{i}^{\intercal}\beta + x_{i, A}^{\intercal}a_{i} + \varepsilon_{i} > 0\right]  \end{align*}$$
+$$\begin{aligned} Y_{i} = \mathbf{1}\left[x_{i}^{\intercal}\beta + x_{i, A}^{\intercal}a_{i} + \varepsilon_{i} > 0\right]  \end{aligned}$$
 for $\varepsilon_{i} \sim \mathcal{N}(0, \sigma^{2}_{E})$, $a_{i} \sim \mathcal{N}(0, \Sigma_{A})$ has %% if $x_{i}$ has $x_{i, A}$ as components %%
-$$\begin{align*} u_{i} = \mathcal{N}\left( 0, x_{i, A}^{\intercal}\Sigma_{A} x_{i, A} + \varepsilon_{i} \right) \end{align*}$$
+$$\begin{aligned} u_{i} = \mathcal{N}\left( 0, x_{i, A}^{\intercal}\Sigma_{A} x_{i, A} + \varepsilon_{i} \right) \end{aligned}$$
 for which, since the **normal median coincides with its mean, satisfies the [[Median Independence|median independence]] condition**. Thus the non-parametric [[All Likelihood|all likelihood]] in this regime may yield a consistency result if we can follow the subset or maximum variance arguments of the composite likelihood modification. **When $\beta$ direction is recovered, row likelihood and column likelihood analogues can be calculated, and we can warmstart the current iterative approach to the solve.** 
 
 ## Coercing a Crossed Maximum Score Estimator
@@ -86,9 +86,9 @@ The pairwise extensions of [[@foxToolkitMatchingMaximum]] and the generality of 
 > 
 > Say an agent is defined to be either a buyer or a seller ex ante, as in the empirical work on the car parts industry later in this paper. Then this is an example of two-sided many-to-many matching. Define $\pi^{j}(\Phi, \Psi)$ to be $-\infty$ if an agent whose observable type $j \in J$ corresponds to a buyer conducts trades as a seller, and similarly for a seller type. A trade $\omega$ specifies the buyer observable type $b(\omega)$ and the seller observable type $s(\omega)$ in addition to other possible attributes, such as the quantity and quality of goods to deliver (if quantity and quality are specified on a finite grid and observable in the data for actual matches). A buyer of full type $i$ or $(j, k)$ then has profits of  
 > 
-> $$\begin{align*} \pi^{j}(\Phi) + \varepsilon_{\Phi}^{k} + \sum_{w \in \Phi} p_{\omega} \end{align*}$$
+> $$\begin{aligned} \pi^{j}(\Phi) + \varepsilon_{\Phi}^{k} + \sum_{w \in \Phi} p_{\omega} \end{aligned}$$
 > As in marriage, the buyer’s unobservable valuation component $\varepsilon_{\Phi}^{k}$ depends on the trades and hence on the observable types $s(\omega) \in J$ of the seller partners. Similarly, a seller full type $i$ or $(j, k)$ has profits of 
-> $$\begin{align*} \pi^{j}(\Psi) + \varepsilon_{\Psi}^{k} + \sum_{\omega \in \Psi} p_{\omega}. \end{align*}$$
+> $$\begin{aligned} \pi^{j}(\Psi) + \varepsilon_{\Psi}^{k} + \sum_{\omega \in \Psi} p_{\omega}. \end{aligned}$$
 > Recall that a competitive equilibrium exists without ruling out empirically relevant cases, such as a function $\pi^{j}(\Phi)$ exhibiting complementarities across multiple trades involving the same agent (e.g., Hatfield and Milgrom (2005)). Complementarities across multiple trades involving the same agent are vital to the empirical application to the car parts industry. 
 > 
 > An agent’s valuation is directly a function of only the trades where that particular agent is a buyer or a seller. The model assumes away externalities: valuations defined over trades to which the agent does not participate. Competition for trades certainly affects the price vector for trades, $p_{\Omega}$, although such competition for trades is not a valuation defined over trades to which the agent does not participate. True externalities could be important in applications; for example, if buyers are retailers and sellers are wholesalers, and buyers compete with each other for retail customers (outside of the matching game) after matching to sellers. Baccara, Imrohoroglu, Wilson and Yariv (2012) use the matching maximum score estimator introduced in this paper to estimate a matching game with externalities.

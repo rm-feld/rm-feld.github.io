@@ -6,52 +6,40 @@ created: 2025-10-02T11:26:53-07:00
 # Set Up
 ## Factorization
 We are considering the model 
-$$\begin{align} Y_{ijk} = \mathbf{1}\left[X_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} > 0 \right],  \end{align}$$
+$$\begin{aligned} Y_{ijk} = \mathbf{1}\left[X_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} > 0 \right],  \end{aligned}$$
 for which $a_{i} \sim \mathcal{N}(0, \sigma^{2}_{A})$, $b_{j} \sim \mathcal{N}(0, \sigma^{2}_{B})$, $c_{k} \sim \mathcal{N}(0, \sigma^{2}_{C})$, and $\varepsilon_{ijk} \sim \mathcal{N}(0, 1)$, all independently. As with [@bellioConsistentScalableComposite2025], we define 
-$$\begin{align} \gamma = \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} \end{align}$$
+$$\begin{aligned} \gamma = \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} \end{aligned}$$
 with corresponding marginal
-$$\begin{align} \mathbb{P}(Y_{ijk} = 1) &= \mathbb{E}\left[ \mathbf{1}\left[X_{ijk}^{\intercal} \gamma + \frac{\varepsilon_{ijk} + a_{i} + b_{j} + c_{k}}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} > 0\right]  \right] \\
-&=: \mathbb{P}\left( X_{ijk}^{\intercal}\gamma + \eta_{ijk} > 0 \right) \\
-&= \Phi\left( X_{ijk}^{\intercal}\gamma \right), \end{align}$$
+$$\begin{aligned} \mathbb{P}(Y_{ijk} = 1) &= \mathbb{E}\left[ \mathbf{1}\left[X_{ijk}^{\intercal} \gamma + \frac{\varepsilon_{ijk} + a_{i} + b_{j} + c_{k}}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} > 0\right]  \right] \\ &=: \mathbb{P}\left( X_{ijk}^{\intercal}\gamma + \eta_{ijk} > 0 \right) \\ &= \Phi\left( X_{ijk}^{\intercal}\gamma \right), \end{aligned}$$
 since $\eta_{ijk} \sim \mathcal{N}(0, 1)$. We make similar statements on conditioning over some slice of the random effects. In particular, notice that (*"factoring out everything except for $c$"*),
-$$\begin{align} \mathbb{P}(Y_{ijk} = 1 \mid a_{i}, b_{j}) &= \mathbb{E}\left[ \mathbf{1}\left[X_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} > 0 \right]  \mid a_{i}, b_{j}\right]  \\
-&= \mathbb{E}\left[ \mathbf{1}\left[\frac{X_{ijk}^{\intercal}\beta}{\sqrt{ 1 + \sigma^{2}_{C} }} + \frac{a_{i} + b_{j}}{\sqrt{ 1 + \sigma^{2}_{C} }} +\frac{\varepsilon_{ijk} + c_{k}}{\sqrt{ 1 + \sigma^{2}_{C} }} > 0 \right] \mid a_{i}, b_{j} \right] \\
-&=: \mathbb{P}\left( X_{ijk}^{\intercal}\gamma_{\neg C} + u_{ij} + \eta_{ij(k)} > 0 \mid u_{ij}\right) \\
-&= \Phi\left( X_{ijk}^{\intercal}\gamma_{\neg C} + u_{ij}\right),\end{align}$$
+$$\begin{aligned} \mathbb{P}(Y_{ijk} = 1 \mid a_{i}, b_{j}) &= \mathbb{E}\left[ \mathbf{1}\left[X_{ijk}^{\intercal}\beta + a_{i} + b_{j} + c_{k} + \varepsilon_{ijk} > 0 \right]  \mid a_{i}, b_{j}\right]  \\ &= \mathbb{E}\left[ \mathbf{1}\left[\frac{X_{ijk}^{\intercal}\beta}{\sqrt{ 1 + \sigma^{2}_{C} }} + \frac{a_{i} + b_{j}}{\sqrt{ 1 + \sigma^{2}_{C} }} +\frac{\varepsilon_{ijk} + c_{k}}{\sqrt{ 1 + \sigma^{2}_{C} }} > 0 \right] \mid a_{i}, b_{j} \right] \\ &=: \mathbb{P}\left( X_{ijk}^{\intercal}\gamma_{\neg C} + u_{ij} + \eta_{ij(k)} > 0 \mid u_{ij}\right) \\ &= \Phi\left( X_{ijk}^{\intercal}\gamma_{\neg C} + u_{ij}\right),\end{aligned}$$
 for which $\tau^{2}_{\neg C} = (\sigma^{2}_{A} + \sigma^{2}_{B}) / (1 + \sigma^{2}_{C})$, and
-$$\begin{align} \gamma_{\neg C} &= \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{C} }} \\
-&= \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} \cdot \frac{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }}{\sqrt{ 1 + \sigma^{2}_{C} }} \\
-&= \gamma\cdot \sqrt{ 1 + \frac{\sigma^{2}_{A} + \sigma^{2}_{B}}{1 + \sigma^{2}_{C}}} = \gamma\cdot \sqrt{ 1 + \tau^{2}_{\neg C} }.\end{align}$$
+$$\begin{aligned} \gamma_{\neg C} &= \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{C} }} \\ &= \frac{\beta}{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }} \cdot \frac{\sqrt{ 1 + \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C} }}{\sqrt{ 1 + \sigma^{2}_{C} }} \\ &= \gamma\cdot \sqrt{ 1 + \frac{\sigma^{2}_{A} + \sigma^{2}_{B}}{1 + \sigma^{2}_{C}}} = \gamma\cdot \sqrt{ 1 + \tau^{2}_{\neg C} }.\end{aligned}$$
 The definitions of $\tau^{2}_{ \neg B}$, $\gamma_{\neg A}$, etc. are obvious and immediate. We define $\psi = \left( \gamma ^{\intercal}, \tau^{2}_{\neg A}, \tau^{2}_{\neg B}, \tau^{2}_{\neg C} \right) ^{\intercal}$ as our parameter vector. 
 
 ## Backsolving
 Define $S = \sigma^{2}_{A} + \sigma^{2}_{B} + \sigma^{2}_{C}$. From here,
 
-$$\begin{align} & \tau^{2}_{\neg  A} = \frac{\sigma^{2}_{B} + \sigma^{2}_{C}}{1 + \sigma^{2}_{A}}  \\
-\implies & 1+ \sigma^{2}_{A} = \frac{\sigma^{2}_{B} + \sigma^{2}_{C}}{\tau^{2}_{\neg A}} \\
-\implies & \sigma^{2}_{A} = \frac{S - \sigma^{2}_{A}}{\tau^{2}_{\neg A} } - 1  \\
-\implies & \left( 1 + \frac{1}{\tau^{2}_{\neg A}} \right)\sigma^{2}_{A} = \frac{S}{\tau^{2}_{\neg A}} - 1 \\
-\implies & \sigma^{2}_{A}  = \frac{S - \tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg  A}}; \end{align}$$
+$$\begin{aligned} & \tau^{2}_{\neg  A} = \frac{\sigma^{2}_{B} + \sigma^{2}_{C}}{1 + \sigma^{2}_{A}}  \\ \implies & 1+ \sigma^{2}_{A} = \frac{\sigma^{2}_{B} + \sigma^{2}_{C}}{\tau^{2}_{\neg A}} \\ \implies & \sigma^{2}_{A} = \frac{S - \sigma^{2}_{A}}{\tau^{2}_{\neg A} } - 1  \\ \implies & \left( 1 + \frac{1}{\tau^{2}_{\neg A}} \right)\sigma^{2}_{A} = \frac{S}{\tau^{2}_{\neg A}} - 1 \\ \implies & \sigma^{2}_{A}  = \frac{S - \tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg  A}}; \end{aligned}$$
 in turn,
-$$\begin{align} & S = \left( \frac{1}{1 + \tau^{2}_{\neg A}} + \frac{1}{1 + \tau^{2}_{\neg B}} + \frac{1}{1 + \tau^{2}_{\neg C}} \right)S - \left( \frac{\tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg A}} + \frac{\tau^{2}_{\neg B}}{1 + \tau^{2}_{\neg B}} + \frac{\tau^{2}_{\neg C}}{1 + \tau^{2}_{\neg C}} \right) \\
-\implies & S = \left(\frac{1}{1 + \tau^{2}_{\neg A}} + \frac{1}{1 + \tau^{2}_{\neg B}} + \frac{1}{1 + \tau^{2}_{\neg C}}  - 1\right)^{-1}\left( \frac{\tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg A}} + \frac{\tau^{2}_{\neg B}}{1 + \tau^{2}_{\neg B}} + \frac{\tau^{2}_{\neg C}}{1 + \tau^{2}_{\neg C}} \right).  \end{align}$$
+$$\begin{aligned} & S = \left( \frac{1}{1 + \tau^{2}_{\neg A}} + \frac{1}{1 + \tau^{2}_{\neg B}} + \frac{1}{1 + \tau^{2}_{\neg C}} \right)S - \left( \frac{\tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg A}} + \frac{\tau^{2}_{\neg B}}{1 + \tau^{2}_{\neg B}} + \frac{\tau^{2}_{\neg C}}{1 + \tau^{2}_{\neg C}} \right) \\ \implies & S = \left(\frac{1}{1 + \tau^{2}_{\neg A}} + \frac{1}{1 + \tau^{2}_{\neg B}} + \frac{1}{1 + \tau^{2}_{\neg C}}  - 1\right)^{-1}\left( \frac{\tau^{2}_{\neg A}}{1 + \tau^{2}_{\neg A}} + \frac{\tau^{2}_{\neg B}}{1 + \tau^{2}_{\neg B}} + \frac{\tau^{2}_{\neg C}}{1 + \tau^{2}_{\neg C}} \right).  \end{aligned}$$
 Let $t_{A} = 1 + \tau^{2}_{\neg A}$ to simplify some clutter. Then since we have the same denominator,
-$$\begin{align} S &= \frac{t_{B}t_{C}(t_{A} - 1) + t_{A}t_{C}(t_{B} - 1) + t_{A}t_{B}(t_{C} - 1)}{t_{B}t_{C} + t_{A}t_{C} + t_{B}t_{A} - t_{A}t_{B}t_{C}} = \frac{2(t_{A}t_{B}t_{C})}{t_{B}t_{C} + t_{A}t_{C} +t_{B}t_{A} - t_{A}t_{B} t_{C}} - 1.  \end{align}$$
+$$\begin{aligned} S &= \frac{t_{B}t_{C}(t_{A} - 1) + t_{A}t_{C}(t_{B} - 1) + t_{A}t_{B}(t_{C} - 1)}{t_{B}t_{C} + t_{A}t_{C} + t_{B}t_{A} - t_{A}t_{B}t_{C}} = \frac{2(t_{A}t_{B}t_{C})}{t_{B}t_{C} + t_{A}t_{C} +t_{B}t_{A} - t_{A}t_{B} t_{C}} - 1.  \end{aligned}$$
 # Estimating $\psi$
 There are many directions of generalization for ARC with three crossed random effects. We list a few below and provide some commentary. 
 
 ## 1
 We can define the $(i,j)$-slice-wise misspecified model likelihood by (N.1.8)
-$$\begin{align} L_{(i, j)}(\tau^{2}_{\neg C}) = \prod_{i = 1}^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) \, du_{ij}, \end{align}$$
+$$\begin{aligned} L_{(i, j)}(\tau^{2}_{\neg C}) = \prod_{i = 1}^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) \, du_{ij}, \end{aligned}$$
 for (N.1.9)
-$$\begin{align} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) = \prod_{k \mid (i, j)} \Phi\left( x_{ijk}^{\intercal} \hat{\gamma}_{\neg C} + u_{ij} \right)^{y_{ijk} } \Phi\left( -x_{ijk}^{\intercal}\hat{\gamma}_{\neg C} - u_{ij}\right)^{1 - y_{ijk}},\end{align}$$
+$$\begin{aligned} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) = \prod_{k \mid (i, j)} \Phi\left( x_{ijk}^{\intercal} \hat{\gamma}_{\neg C} + u_{ij} \right)^{y_{ijk} } \Phi\left( -x_{ijk}^{\intercal}\hat{\gamma}_{\neg C} - u_{ij}\right)^{1 - y_{ijk}},\end{aligned}$$
 taking $k \mid (i, j) = \left\{ k:(i, j, k) \in \mathcal{S} \right\}$ the natural observed set of indices. 
 
 ## 2 Too Big one
 
 ## 3
 Maybe we solve for a $\gamma_{i(j)}$ instead, in the intermediate sense; fit an augmenetation
-$$\begin{align} X_{ijk}^{\intercal}\beta + a_{i} \end{align}$$
+$$\begin{aligned} X_{ijk}^{\intercal}\beta + a_{i} \end{aligned}$$
 
 
 
@@ -68,15 +56,15 @@ In what other ways can we consider and fit the misspecified model? A direction o
 - 99% 1% thing
 
 A natural notion is to split $u_{ij}$; define
-$$\begin{align} u_{i} = \frac{a_{i}}{\sqrt{ 1 + \sigma^{2}_{C} }} \sim \mathcal{N}\left( 0, \frac{\sigma^{2}_{A}}{1 + \sigma^{2}_{C}} \right) , \,\,\,\, v_{j} = \frac{b_{j}}{\sqrt{ 1 + \sigma^{2}_{C} }} \sim \mathcal{N}\left( 0, \frac{\sigma^{2}_{B}}{1 + \sigma^{2}_{C}} \right).\end{align}$$
+$$\begin{aligned} u_{i} = \frac{a_{i}}{\sqrt{ 1 + \sigma^{2}_{C} }} \sim \mathcal{N}\left( 0, \frac{\sigma^{2}_{A}}{1 + \sigma^{2}_{C}} \right) , \,\,\,\, v_{j} = \frac{b_{j}}{\sqrt{ 1 + \sigma^{2}_{C} }} \sim \mathcal{N}\left( 0, \frac{\sigma^{2}_{B}}{1 + \sigma^{2}_{C}} \right).\end{aligned}$$
 - model class balances as random draw?
 
 The issue that emerges is that shared $i$ or $j$ induces the "necessity" of integration over slice dependence. **treat as replicates?** estimate term?
 - an idea - with replicates we can do binomial integration, which might be nicer.
 
-$$\begin{align} L_{[i,j]} () = \prod_{i = 1}^{I} \int \prod_{j = 1}^{J}  \, dx  \end{align}$$
+$$\begin{aligned} L_{[i,j]} () = \prod_{i = 1}^{I} \int \prod_{j = 1}^{J}  \, dx  \end{aligned}$$
 
-$$\begin{align} L_{[i, j]} () = \prod_{i = 1}^{I} \end{align}$$
+$$\begin{aligned} L_{[i, j]} () = \prod_{i = 1}^{I} \end{aligned}$$
 
 # Iterations of Likelihood Form Under Negation Factorization - Throwing Things at the Wall
 
@@ -84,24 +72,24 @@ $$\begin{align} L_{[i, j]} () = \prod_{i = 1}^{I} \end{align}$$
 - 
 ## (1)
 **Motivation:** marginal of the negation factorization
-$$\begin{align} L_{(i, j)}(\tau^{2}_{\neg C}) = \prod_{i = 1}^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) \, du_{ij}, \end{align}$$
+$$\begin{aligned} L_{(i, j)}(\tau^{2}_{\neg C}) = \prod_{i = 1}^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) \, du_{ij}, \end{aligned}$$
 
-$$\begin{align} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) = \prod_{k \mid (i, j)} \Phi\left( x_{ijk}^{\intercal} \hat{\gamma}_{\neg C} + u_{ij} \right)^{y_{ijk} } \Phi\left( -x_{ijk}^{\intercal}\hat{\gamma}_{\neg C} - u_{ij}\right)^{1 - y_{ijk}},\end{align}$$
+$$\begin{aligned} L_{ij\bullet} (\hat{\gamma}_{\neg C} \mid u_{ij}) = \prod_{k \mid (i, j)} \Phi\left( x_{ijk}^{\intercal} \hat{\gamma}_{\neg C} + u_{ij} \right)^{y_{ijk} } \Phi\left( -x_{ijk}^{\intercal}\hat{\gamma}_{\neg C} - u_{ij}\right)^{1 - y_{ijk}},\end{aligned}$$
 
 
 ## (2)
 - **Motivation:** a naive way of dealing with levels is an "inconsequential" approximation of some nuisance term
-$$\begin{align} L_{(i, j)}(\tau^{2}_{\neg C}) &= \prod_{i = 1}^{I} \int \prod_{j = 1}^{J}  \, dx \end{align}$$
+$$\begin{aligned} L_{(i, j)}(\tau^{2}_{\neg C}) &= \prod_{i = 1}^{I} \int \prod_{j = 1}^{J}  \, dx \end{aligned}$$
 
 ## (3)
-$$\begin{align} L_{(i,j)} (\tau^{2}_{\neg C}) = \prod_{i =1 }^{I} \prod_{j = 1} ^{J} \end{align}$$
+$$\begin{aligned} L_{(i,j)} (\tau^{2}_{\neg C}) = \prod_{i =1 }^{I} \prod_{j = 1} ^{J} \end{aligned}$$
 
 ## (4) 
-$$\begin{align} L_{(i, j)} = \prod_{i =1 }^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}^{2}} L_{ij\bullet}\, dx \end{align}$$
+$$\begin{aligned} L_{(i, j)} = \prod_{i =1 }^{I} \prod_{j = 1}^{J} \int _{\mathbb{R}^{2}} L_{ij\bullet}\, dx \end{aligned}$$
 
 - explicit likelihood under misspec
 
-$$\begin{align} L_{(i, j)} = \prod_{i = 1}^{I} \int_{\mathbb{R}^{| J_{i}| + 1}}  \varphi\left( \frac{u_{i}}{ \sigma_{A} / \sqrt{ 1  + \sigma^{2}_{C} }}\right)\prod_{j \mid i} \left[ \prod_{k\mid (i, j)} \Phi\left( X_{ijk}^{\intercal}\beta + u_{i} + v_{j} \right)^{y_{ijk}}\Phi\left( -X_{ijk}^{\intercal}\beta - u_{i} - v_{j} \right)^{1 - y_{ijk}}  \right]  (1 + \sigma^{2}_{C}) \frac{1}{\sqrt{ \sigma_{A} \sigma_{B} }} \varphi \left( \frac{v_{j}}{\sigma_{B} / \sqrt{ 1 + \sigma^{2}_{C} }} \right)\, d\left\{ v_{J \mid i} \right\} du_{i}    \end{align}$$
+$$\begin{aligned} L_{(i, j)} = \prod_{i = 1}^{I} \int_{\mathbb{R}^{| J_{i}| + 1}}  \varphi\left( \frac{u_{i}}{ \sigma_{A} / \sqrt{ 1  + \sigma^{2}_{C} }}\right)\prod_{j \mid i} \left[ \prod_{k\mid (i, j)} \Phi\left( X_{ijk}^{\intercal}\beta + u_{i} + v_{j} \right)^{y_{ijk}}\Phi\left( -X_{ijk}^{\intercal}\beta - u_{i} - v_{j} \right)^{1 - y_{ijk}}  \right]  (1 + \sigma^{2}_{C}) \frac{1}{\sqrt{ \sigma_{A} \sigma_{B} }} \varphi \left( \frac{v_{j}}{\sigma_{B} / \sqrt{ 1 + \sigma^{2}_{C} }} \right)\, d\left\{ v_{J \mid i} \right\} du_{i}    \end{aligned}$$
 
 # How Can I Misspecify My Models in a Nice Way
 ## Throwing Things at the Wall
